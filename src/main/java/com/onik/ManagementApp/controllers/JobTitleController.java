@@ -37,18 +37,18 @@ public class JobTitleController {
 	@PostMapping("/addnew")
 	public String addNew(JobTitle jobTitle) {
 		jobTitleService.save(jobTitle);
-		return "redirect:/jobTitles";
+		return "redirect:/jobtitles";
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT, RequestMethod.GET })
 	public String update(JobTitle jobTitle) {
 		jobTitleService.save(jobTitle);
-		return "redirect:/jobTitles";
+		return "redirect:/jobtitles";
 	}
 
 	@RequestMapping(value = "/delete", method = { RequestMethod.DELETE, RequestMethod.GET })
 	public String deleteById(Integer id) {
 		jobTitleService.deleteById(id);
-		return "redirect:/jobTitles";
+		return "redirect:/jobtitles";
 	}
 }

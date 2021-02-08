@@ -36,18 +36,18 @@ public class EmployeeTypeController {
 	@PostMapping("/addnew")
 	public String addNew(EmployeeType employeeType) {
 		employeeTypeService.save(employeeType);
-		return "redirect:/employeeTypes";
+		return "redirect:/employeetypes";
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT, RequestMethod.GET })
 	public String update(EmployeeType employeeType) {
 		employeeTypeService.save(employeeType);
-		return "redirect:/employeeTypes";
+		return "redirect:/employeetypes";
 	}
 
 	@RequestMapping(value = "/delete", method = { RequestMethod.DELETE, RequestMethod.GET })
 	public String deleteById(Integer id) {
 		employeeTypeService.deleteById(id);
-		return "redirect:/employeeTypes";
+		return "redirect:/employeetypes";
 	}
 }

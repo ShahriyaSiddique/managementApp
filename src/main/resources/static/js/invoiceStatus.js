@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$("table #editLocation").click(function(event) {
+	$("table #editBtn").click(function(event) {
 		event.preventDefault();		
 		var href= $(this).attr('href');		
 		$.get(href, function(invoiceStatus, status){
@@ -10,7 +10,7 @@ $(document).ready(function() {
 		$('#editModal').modal();
 	});
 	
-	$("table #detailsLocation").click(function(event) {
+	$("table #detailsBtn").click(function(event) {
 		event.preventDefault();		
 		var href= $(this).attr('href');		
 		$.get(href, function(invoiceStatus, status){

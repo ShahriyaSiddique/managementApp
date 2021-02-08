@@ -36,19 +36,19 @@ public class InvoiceStatusController {
 	@PostMapping("/addnew")
 	public String addNew(InvoiceStatus invoiceStatus) {
 		invoiceStatusService.save(invoiceStatus);
-		return "redirect:/invoiceStatuses";
+		return "redirect:/invoicestatuses";
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT, RequestMethod.GET })
 	public String update(InvoiceStatus invoiceStatus) {
 		invoiceStatusService.save(invoiceStatus);
-		return "redirect:/invoiceStatuses";
+		return "redirect:/invoicestatuses";
 	}
 
 	@RequestMapping(value = "/delete", method = { RequestMethod.DELETE, RequestMethod.GET })
 	public String deleteById(Integer id) {
 		invoiceStatusService.deleteById(id);
-		return "redirect:/invoiceStatuses";
+		return "redirect:/invoicestatuses";
 	}
 
 }

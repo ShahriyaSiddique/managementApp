@@ -36,18 +36,18 @@ public class VehicleTypeController {
 	@PostMapping("/addnew")
 	public String addNew(VehicleType vehicleType) {
 		vehicleTypeService.save(vehicleType);
-		return "redirect:/vehicleTypes";
+		return "redirect:/vehicletypes";
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT, RequestMethod.GET })
 	public String update(VehicleType vehicleType) {
 		vehicleTypeService.save(vehicleType);
-		return "redirect:/vehicleTypes";
+		return "redirect:/vehicletypes";
 	}
 
 	@RequestMapping(value = "/delete", method = { RequestMethod.DELETE, RequestMethod.GET })
 	public String deleteById(Integer id) {
 		vehicleTypeService.deleteById(id);
-		return "redirect:/vehicleTypes";
+		return "redirect:/vehicletypes";
 	}
 }

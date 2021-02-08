@@ -11,13 +11,17 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
-<title>Vehicle Movement Register</title>
+<title>Blank | Creative - Bootstrap 3 Responsive Admin Template</title>
 
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- bootstrap theme -->
 <link href="css/bootstrap-theme.css" rel="stylesheet">
+<!--external css-->
+<!-- font icon -->
 <link href="css/elegant-icons-style.css" rel="stylesheet" />
 <link href="css/font-awesome.min.css" rel="stylesheet" />
+<!-- Custom styles -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
 
@@ -299,7 +303,7 @@
 					</a>
 						<ul class="sub">
 							<li><a class="" th:href="@{/invoices}">Invoices</a></li>
-							<li><a class="" th:href="@{/invoicestatus}">Invoice
+							<li><a class="" th:href="@{/invoicestatuses}">Invoice
 									Status Values</a></li>
 						</ul></li>
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
@@ -323,12 +327,12 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-table"></i> Table
+							<i class="fa fa-table"></i> Invoices Records
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-							<li><i class="fa fa-table"></i>Table</li>
-							<li><i class="fa fa-th-list"></i>Basic Table</li>
+							<li><i class="fa fa-table"></i>Invoice</li>
+							<li><i class="fa fa-th-list"></i>Invoices Records</li>
 						</ol>
 					</div>
 				</div>
@@ -337,34 +341,34 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<section class="panel">
-							<header class="panel-heading"> Vehicle Movements </header>
+							<header class="panel-heading">Invoice List</header>
 							<button type="button" class="btn btn-primary" data-toggle="modal"
-								data-target="#addModal">Add New</button>
+								data-target="#addModal">Add Invoice</button>
 
 							<table class="table table-striped table-advance table-hover">
 								<tbody>
 									<tr>
 										<th><i class="icon_table"></i> Id</th>
-										<th><i class="icon_table"></i>Vehicle</th>
 										<th><i class="icon_table"></i>Date</th>
-										<th><i class="icon_table"></i> Remarks</th>
+										<th><i class="icon_table"></i> Client</th>
+										<th><i class="icon_table"></i>Remarks</th>
 										<th><i class="icon_cogs"></i> Action</th>
 									</tr>
-									<tr th:each="vehicleMovement:${vehicleMovements}">
-										<td th:text="${vehicleMovement.id}">Id</td>
-										<td th:text="${vehicleMovement.vehicle.name}">Vehicle</td>
-										<td th:text="${vehicleMovement.date1}">Date</td>
-										<td th:text="${vehicleMovement.remarks}">Remarks</td>
+									<tr th:each="invoice:${invoices}">
+										<td th:text="${invoice.id}">Id</td>
+										<td th:text="${invoice.invoiceDate}">Invoice Date</td>
+										<td th:text="${invoice.client.name}">Client</td>
+										<td th:text="${invoice.remarks}">Remarks</td>
 										<td>
 											<div class="btn-group">
-												<a class="btn btn-primary" id="editButton"
-													th:href="@{/vehiclemovements/findById/(id=${vehicleMovement.id})}"><i
+												<a class="btn btn-primary" id="editBtn"
+													th:href="@{/invoices/findById/(id=${invoice.id})}"><i
 													class="icon_pencil-edit"></i></a> <a class="btn btn-success"
-													id="detailsButton"
-													th:href="@{/vehiclemovements/findById/(id=${vehicleMovement.id})}"><i
+													id="detailsBtn"
+													th:href="@{/invoices/findById/(id=${invoice.id})}"><i
 													class="icon_document_alt"></i></a> <a class="btn btn-danger"
-													id="deleteButton"
-													th:href="@{/vehiclemovements/delete/(id=${vehicleMovement.id})}"><i
+													id="deleteBtn"
+													th:href="@{/invoices/delete/(id=${invoice.id})}"><i
 													class="icon_close_alt2"></i></a>
 											</div>
 										</td>
@@ -383,273 +387,362 @@
 		</div>
 	</section>
 	<!-- container section end -->
+	
+	<!-- Modal Starts -->
+	
+	<div
+      class="modal fade"
+      id="addModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <form th:action="@{/invoices/addnew}" method="post">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                New Invoice Record
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
-	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<form th:action="@{/vehiclemovements/addnew}" method="post">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">New Movement
-							Record</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="idAdd" class="col-form-label">Id:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="idAdd"
+                  name="id"
+                  disabled
+                />
+              </div>
 
-					<div class="modal-body">
+              <div class="form-group">
+                <label for="ddlClientAdd" class="col-form-label"
+                  >Client:
+                </label>
+                <select class="form-control" id="ddlClientAdd" name="clientid">
+                  <option>-SELECT-</option>
+                  <option
+                    th:each="client:${clients}"
+                    th:value="${client.id}"
+                    th:text="${client.name}"
+                  ></option>
+                </select>
+              </div>
 
-						<div class="form-group">
-							<label for="idAdd" class="col-form-label">Id:</label> <input
-								type="text" class="form-control" id="idAdd" name="id" disabled>
-						</div>
+              <div class="form-group">
+                <label for="invoiceDateAdd" class="col-form-label"
+                  >Invoice Date:</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="invoiceDateAdd"
+                  name="invoiceDate"
+                />
+              </div>
 
-						<div class="form-group">
-							<label for="ddlVehicleAdd" class="col-form-label">Vehicle:
-							</label> <select class="form-control" id="ddlVehicleAdd" name="vehicleid">
-								<option>-SELECT-</option>
-								<option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}"
-									th:text="${vehicle.name}"></option>
-							</select>
-						</div>
+              <div class="form-group">
+                <label for="ddlInvoiceStatsAdd" class="col-form-label"
+                  >Invoice Status:
+                </label>
+                <select
+                  class="form-control"
+                  id="ddlInvoiceStatusAdd"
+                  name="invoicestatusid"
+                >
+                  <option>-SELECT-</option>
+                  <option
+                    th:each="invoiceStatus : ${invoiceStatuses}"
+                    th:value="${invoiceStatus.id}"
+                    th:text="${invoiceStatus.description}"
+                  ></option>
+                </select>
+              </div>
 
-						<div class="form-group">
-							<label for="ddlLocation1Add" class="col-form-label">Departed
-								from: </label> <select class="form-control" id="ddlLocation1Add"
-								name="locationid1">
-								<option>-SELECT-</option>
-								<option th:each="location : ${locations}"
-									th:value="${location.id}" th:text="${location.description}">
-								</option>
-							</select>
-						</div>
+              <div class="form-group">
+                <label for="remarksAdd" class="col-form-label">Remarks:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="remarksAdd"
+                  name="remarks"
+                />
+              </div>
+            </div>
 
-						<div class="form-group">
-							<label for="date1Add" class="col-form-label">Departure
-								Date:</label> <input type="date" class="form-control" id="date1Add"
-								name="date1">
-						</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
-						<div class="form-group">
-							<label for="ddlLocation2Add" class="col-form-label">Arrived
-								at: </label> <select class="form-control" id="ddlLocation2Add"
-								name="locationid2">
-								<option>-SELECT-</option>
-								<option th:each="location : ${locations}"
-									th:value="${location.id}" th:text="${location.description}">
-								</option>
-							</select>
-						</div>
+    <div
+      class="modal fade"
+      id="editModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="ModalLabel"
+      aria-hidden="true"
+    >
+      <form th:action="@{/invoices/update}" method="put">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">
+                Edit Invoice Record
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="idEdit" class="col-form-label">Id:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="idEdit"
+                  name="id"
+                  readonly
+                />
+              </div>
 
-						<div class="form-group">
-							<label for="date2Add" class="col-form-label">Arrival
-								date:</label> <input type="date" class="form-control" id="date2Add"
-								name="date2">
-						</div>
+              <div class="form-group">
+                <label for="ddlClientEdit" class="col-form-label"
+                  >Client:
+                </label>
+                <select class="form-control" id="ddlClientEdit" name="clientid">
+                  <option>-SELECT-</option>
+                  <option
+                    th:each="client:${clients}"
+                    th:value="${client.id}"
+                    th:text="${client.name}"
+                  ></option>
+                </select>
+              </div>
 
-						<div class="form-group">
-							<label for="remarksAdd" class="col-form-label">Remarks:</label> <input
-								type="text" class="form-control" id="remarksAdd" name="remarks">
-						</div>
-					</div>
+              <div class="form-group">
+                <label for="invoiceDateEdit" class="col-form-label"
+                  >Invoice Date:</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="invoiceDateEdit"
+                  name="invoiceDate"
+                />
+              </div>
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save</button>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+              <div class="form-group">
+                <label for="ddlInvoiceStatusEdit" class="col-form-label"
+                  >Invoice Status:
+                </label>
+                <select
+                  class="form-control"
+                  id="ddlInvoiceStatusEdit"
+                  name="invoicestatusid"
+                >
+                  <option>-SELECT-</option>
+                  <option
+                    th:each="invoiceStatus:${invoiceStatuses}"
+                    th:value="${invoiceStatus.id}"
+                    th:text="${invoiceStatus.description}"
+                  ></option>
+                </select>
+              </div>
 
-	<div class="modal fade" id="editModal" tabindex="-1" role="dialog"
-		aria-labelledby="ModalLabel" aria-hidden="true">
-		<form th:action="@{/vehiclemovements/update}" method="put">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="editModalLabel">Edit Movement
-							Record</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
+              <div class="form-group">
+                <label for="remarksEdit" class="col-form-label">Remarks:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="remarksEdit"
+                  name="remarks"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
-						<div class="form-group">
-							<label for="idEdit" class="col-form-label">Id:</label> <input
-								type="text" class="form-control" id="idEdit" name="id" readonly>
-						</div>
+    <div
+      class="modal fade"
+      id="detailsModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="ModalLabel"
+      aria-hidden="true"
+    >
+      <form>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Locations Details</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="idDetails" class="col-form-label">Id:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="idDetails"
+                  name="id"
+                  disabled
+                />
+              </div>
 
-						<div class="form-group">
-							<label for="ddlVehicleEdit" class="col-form-label">Vehicle:
-							</label> <select class="form-control" id="ddlVehicleEdit"
-								name="vehicleid">
-								<option>-SELECT-</option>
-								<option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}"
-									th:text="${vehicle.name}"></option>
-							</select>
-						</div>
+              <div class="form-group">
+                <label for="ddlClientDetails" class="col-form-label"
+                  >Client:
+                </label>
+                <select
+                  class="form-control"
+                  id="ddlClientDetails"
+                  name="clientid"
+                >
+                  <option>-SELECT-</option>
+                  <option
+                    th:each="client : ${clients}"
+                    th:value="${client.id}"
+                    th:text="${client.name}"
+                  ></option>
+                </select>
+              </div>
 
-						<div class="form-group">
-							<label for="ddlLocation1Edit" class="col-form-label">Departed
-								from: </label> <select class="form-control" id="ddlLocation1Edit"
-								name="locationid1">
-								<option>-SELECT-</option>
-								<option th:each="location : ${locations}"
-									th:value="${location.id}" th:text="${location.description}">
-								</option>
-							</select>
-						</div>
+              <div class="form-group">
+                <label for="invoiceDateDetails" class="col-form-label"
+                  >Invoice Date:</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="invoiceDateDetails"
+                  name="invoiceDate"
+                />
+              </div>
 
-						<div class="form-group">
-							<label for="date1Edit" class="col-form-label">Departure
-								Date:</label> <input type="date" class="form-control" id="date1Edit"
-								name="date1">
-						</div>
+              <div class="form-group">
+                <label for="ddlInvoiceStatusDetails" class="col-form-label"
+                  >Invoice Status:
+                </label>
+                <select
+                  class="form-control"
+                  id="ddlInvoiceStatusDetails"
+                  name="invoicestatusid"
+                >
+                  <option>-SELECT-</option>
+                  <option
+                    th:each="invoiceStatus : ${invoiceStatuses}"
+                    th:value="${invoiceStatus.id}"
+                    th:text="${invoiceStatus.description}"
+                  ></option>
+                </select>
+              </div>
 
-						<div class="form-group">
-							<label for="ddlLocation2Edit" class="col-form-label">Arrived
-								at: </label> <select class="form-control" id="ddlLocation2Edit"
-								name="locationid2">
-								<option>-SELECT-</option>
-								<option th:each="location : ${locations}"
-									th:value="${location.id}" th:text="${location.description}">
-								</option>
-							</select>
-						</div>
+              <div class="form-group">
+                <label for="remarksDetails" class="col-form-label"
+                  >Remarks:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="remarksDetails"
+                  name="remarks"
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
 
-						<div class="form-group">
-							<label for="date2Edit" class="col-form-label">Arrival
-								date:</label> <input type="date" class="form-control" id="date2Edit"
-								name="date2">
-						</div>
-
-						<div class="form-group">
-							<label for="remarksEdit" class="col-form-label">Remarks:</label>
-							<input type="text" class="form-control" id="remarksEdit"
-								name="remarks">
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save</button>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-
-	<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog"
-		aria-labelledby="ModalLabel" aria-hidden="true">
-		<form>
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="editModalLabel">Movements Details</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
-						<div class="form-group">
-							<label for="idDetails" class="col-form-label">Id:</label> <input
-								type="text" class="form-control" id="idDetails" name="id"
-								disabled>
-						</div>
-
-						<div class="form-group">
-							<label for="ddlVehicleDetails" class="col-form-label">Vehicle:
-							</label> <select class="form-control" id="ddlVehicleDetails"
-								name="vehicleid">
-								<option>-SELECT-</option>
-								<option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}"
-									th:text="${vehicle.name}"></option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="ddlLocation1Details" class="col-form-label">Departed
-								from: </label> <select class="form-control" id="ddlLocation1Details"
-								name="locationid1">
-								<option>-SELECT-</option>
-								<option th:each="location : ${locations}"
-									th:value="${location.id}" th:text="${location.description}">
-								</option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="date1Details" class="col-form-label">Departure
-								Date:</label> <input type="text" class="form-control" id="date1Details"
-								name="date1">
-						</div>
-
-						<div class="form-group">
-							<label for="ddlLocation2Details" class="col-form-label">Arrived
-								at: </label> <select class="form-control" id="ddlLocation2Details"
-								name="locationid2">
-								<option>-SELECT-</option>
-								<option th:each="location : ${locations}"
-									th:value="${location.id}" th:text="${location.description}">
-								</option>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="date2Details" class="col-form-label">Arrival
-								date:</label> <input type="text" class="form-control" id="date2Details"
-								name="date2">
-						</div>
-
-						<div class="form-group">
-							<label for="remarksDetails" class="col-form-label">Remarks:</label>
-							<input type="text" class="form-control" id="remarksDetails"
-								name="remarks">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
-
-	<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title">Confirm delete</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<p>Are you sure you want to delete this record?</p>
-				</div>
-				<div class="modal-footer">
-					<a href="" class="btn btn-primary" id="confirmDeleteButton">Yes,
-						Delete</a>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
+    <div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Confirm delete</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this record?</p>
+          </div>
+          <div class="modal-footer">
+            <a href="" class="btn btn-primary" id="delRef">Yes, Delete</a>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	<!-- Modal ends -->
+	
 	<!-- javascripts -->
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -658,10 +751,9 @@
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
 	<!--custome script for all page-->
 	<script src="js/scripts.js"></script>
-	<script src="js/vehicleMovement.js"></script>
+	<script src="js/invoice.js"></script>
 
 
 </body>
-
 
 </html>

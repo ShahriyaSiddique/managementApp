@@ -36,19 +36,19 @@ public class VehicleModelController {
 	@PostMapping("/addnew")
 	public String addNew(VehicleModel vehicleModel) {
 		vehicleModelService.save(vehicleModel);
-		return "redirect:/vehicleModels";
+		return "redirect:/vehiclemodels";
 	}
 
 	@RequestMapping(value = "/update", method = { RequestMethod.PUT, RequestMethod.GET })
 	public String update(VehicleModel vehicleModel) {
 		vehicleModelService.save(vehicleModel);
-		return "redirect:/vehicleModels";
+		return "redirect:/vehiclemodels";
 	}
 
 	@RequestMapping(value = "/delete", method = { RequestMethod.DELETE, RequestMethod.GET })
 	public String deleteById(Integer id) {
 		vehicleModelService.deleteById(id);
-		return "redirect:/vehicleModels";
+		return "redirect:/vehiclemodels";
 	}
 
 }

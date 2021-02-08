@@ -327,7 +327,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa fa-bars"></i> Pages
+							<i class="fa fa fa-bars"></i> Employee Type Records
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
@@ -356,13 +356,13 @@
 							<td th:text="${employeeType.description}"></td>
 							<td th:text="${employeeType.details}"></td>
 							<td><a
-								th:href="@{/employeetypes/findById/(id=${location.id})}"
+								th:href="@{/employeetypes/findById/(id=${employeeType.id})}"
 								id="editBtn" class="btn btn-primary"><i
 									class="fa fa-pencil-square-o" aria-hidden="true"></i></a> <a
-								th:href="@{/employeetypes/findById/(id=${location.id})}"
+								th:href="@{/employeetypes/findById/(id=${employeeType.id})}"
 								id="detailsBtn" class="btn btn-success"><i
 									class="fa fa-file-text" aria-hidden="true"></i></a> <a
-								th:href="@{/employeetypes/delete/(id=${location.id})}"
+								th:href="@{/employeetypes/delete/(id=${employeeType.id})}"
 								id="deleteBtn" class="btn btn-danger"><i
 									class="fa fa-times-circle-o" aria-hidden="true"></i></a></td>
 						</tr>
