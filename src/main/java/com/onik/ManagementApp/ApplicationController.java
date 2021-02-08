@@ -16,4 +16,14 @@ public class ApplicationController {
 		return "login";
 	}
 
+	@GetMapping("/logout")
+	public String showLogout() {
+		return "login";
+	}
+
+	@GetMapping("/register")
+	public String showRegister() {
+		return "register";
+	}
+
 }
