@@ -229,8 +229,12 @@
 					<!-- user login dropdown start-->
 					<li class="dropdown"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
-								<img alt="" src="img/avatar1_small.jpg">
-						</span> <span class="username">Jenifer Smith</span> <b class="caret"></b>
+								<img th:alt="${#authentication.getPrincipal().getUsername()}"
+								th:src="@{'/img/photos/' + ${#authentication.getPrincipal().getUsername()} + '.jpg'}"
+								width="38" height="38">
+						</span> <span class="username"
+							th:text=${#authentication.getPrincipal().getUsername()}>Guest</span>
+							<b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu extended logout">
 							<div class="log-arrow-up"></div>
